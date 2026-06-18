@@ -1,0 +1,85 @@
+# =============================================================================
+#  CyberQuest Academy — Isolated Practice Lab
+#  labs/docker-compose.yml
+# =============================================================================
+#
+#  ⚠️  READ THIS BEFORE YOU RUN ANYTHING  ⚠️
+#
+#  These containers are INTENTIONALLY VULNERABLE. They exist only so you can
+#  practise safely against targets you are authorised to test.
+#
+#  SAFETY RULES (non-negotiable — see Module 00):
+#   1. Every port below is bound to 127.0.0.1 (localhost) ONLY. These targets
+#      must NEVER be reachable from the internet or your LAN.
+#   2. DO NOT run this on a cloud VM with a public IP, a server, or any machine
+#      others can reach. Run it on your own laptop/desktop.
+#   3. DO NOT change 127.0.0.1 to 0.0.0.0 — that would expose vulnerable
+#      services to your whole network. If you don't know what that means, leave
+#      it exactly as it is.
+#   4. Bring the lab DOWN when you finish:  docker compose down
+#
+#  USAGE:
+#     docker compose up -d        # start the lab (detached)
+#     docker compose ps           # see what's running
+#     docker compose logs -f      # follow logs
+#     docker compose down         # stop and remove everything
+#
+#  TARGETS (open in your browser on the host):
+#     DVWA            http://127.0.0.1:8080   (login admin / password)
+#     OWASP Juice Shop http://127.0.0.1:3000
+#     WebGoat         http://127.0.0.1:8081/WebGoat
+#
+#  Your attacker box (Kali) and a full-OS target (Metasploitable) are run as
+#  SEPARATE VirtualBox/VMware VMs on a HOST-ONLY network — see Module 01.
+#  Docker is used here only for the deliberately-vulnerable web apps.
+# =============================================================================
+
+name: cyberquest-lab
+
+services:
+
+  # --- DVWA: Damn Vulnerable Web Application ---------------------------------
+  dvwa:
+    image: vulnerables/web-dvwa:latest
+    container_name: cq-dvwa
+    # Bind to localhost ONLY. Do not change the 127.0.0.1 prefix.
+    ports:
+      - "127.0.0.1:8080:80"
+    networks:
+      - labnet
+    restart: unless-stopped
+    # Drop unneeded privileges as a small hardening measure.
+    security_opt:
+      - no-new-privileges:true
+
+  # --- OWASP Juice Shop: modern vulnerable web app --------------------------
+  juice-shop:
+    image: bkimminich/juice-shop:latest
+    container_name: cq-juice-shop
+    ports:
+      - "127.0.0.1:3000:3000"
+    networks:
+      - labnet
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+
+  # --- OWASP WebGoat: guided lessons on web vulnerabilities -----------------
+  webgoat:
+    image: webgoat/webgoat:latest
+    container_name: cq-webgoat
+    ports:
+      - "127.0.0.1:8081:8080"
+    networks:
+      - labnet
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+
+networks:
+  # Internal bridge so the containers share a network for multi-target
+  # exercises, while host access is restricted by the 127.0.0.1 port bindings
+  # above. This network is NOT your home LAN.
+  labnet:
+    driver: bridge
+    name: cyberquest-labnet

@@ -1,0 +1,83 @@
+# =============================================================================
+#  CyberQuest Academy — MkDocs configuration
+#  Cybersecurity & Ethical Hacking Programming Automation
+# =============================================================================
+
+site_name: CyberQuest Academy
+site_description: Free, beginner-to-advanced, ethics-first cybersecurity & ethical-hacking automation training.
+site_author: GeeksDane Consultancy
+
+theme:
+  name: material
+  palette:
+    # BRIGHT (light) theme
+    - scheme: default
+      primary: teal
+      accent: deep purple
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+    # DARK theme (default)
+    - scheme: slate
+      primary: teal
+      accent: deep purple
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+  features:
+    - content.code.copy
+    - content.code.annotate
+    - navigation.sections
+    - navigation.tracking
+    - navigation.top
+    - toc.follow
+    - search.suggest
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+
+nav:
+  - Home: index.md
+  - "Start Here":
+      - "00 · Ethics, Law & Authorisation": 00-ethics-law.md
+  - "Tier 0 · Foundations":
+      - "01 · Building Your Safe Lab": 01-safe-lab.md
+      - "02 · Linux & Command-Line": 02-linux-cli.md
+      - "03 · Git & GitHub": 03-git.md
+      - "04 · Python Fundamentals I": 04-python-1.md
+      - "05 · Python Fundamentals II": 05-python-2.md
+      - "06 · Python for Files & Data": 06-python-files.md
+  - "Tier 1 · Networking & Automation Core":
+      - "07 · Networking Fundamentals": 07-networking.md
+      - "08 · Python Networking": 08-python-networking.md
+      - "09 · Recon & OSINT": 09-recon-osint.md
+      - "10 · Scanning & Enumeration": 10-scanning.md
+      - "11 · Scapy & Traffic Analysis": 11-scapy.md
+  - "Tier 2 · Offensive Security":
+      - "12 · Cryptography Essentials": 12-cryptography.md
+      - "13 · Web App Security I": 13-webapp-1.md
+      - "14 · Web App Security II": 14-webapp-2.md
+      - "15 · Authentication & Passwords": 15-auth-passwords.md
+      - "16 · Vulnerability ID & Exploitation": 16-exploitation.md
+  - "Tier 3 · Advanced & Specialisation":
+      - "17 · Post-Exploitation": 17-post-exploitation.md
+      - "18 · Wireless (Optional)": 18-wireless.md
+      - "19 · Malware Analysis (Optional)": 19-malware-analysis.md
+      - "20 · Blue-Team Automation": 20-blue-team.md
+  - "Tier 4 · Professional & Capstone":
+      - "21 · Reporting": 21-reporting.md
+      - "22 · Capstone Engagement": 22-capstone.md
+      - "22 · Capstone — Full Lab Procedure": 22-capstone-procedure.md
