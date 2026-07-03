@@ -61,7 +61,7 @@ plugins:
 nav:
   - Home: index.html
   - "Start Here":
-      - "00 · Ethics, Law & Authorisation": 00-ethics-law.md
+      - "00 · Ethics, Law & Authorisation": 00-ethics-law/index.html
   - "Course 01 · Foundations":
       - "Penetration Testing Foundations": 01-foundations/index.html
   - "Course 02 · Web Application VAPT":

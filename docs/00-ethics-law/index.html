@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 00 · Ethics, Law & Authorisation — CyberGate Academy</title>
+<meta name="description" content="The mandatory ethics gate. Before any tool is touched — Computer Misuse Act 1990, authorisation, scope, and rules of engagement. CyberGate Academy by GeeksDane Consultancy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A0E1A;--surface:#0F1525;--card:#141B2D;--border:#1E2A44;
+  --green:#00D46A;--green-dim:#004D27;--amber:#F5A623;--amber-dim:#3D2800;
+  --red:#FF4757;--blue:#3D8EF0;--ink:#E2E8F0;--muted:#64748B;--dim:#334155;
+  --radius:10px;--font-code:'JetBrains Mono',monospace;
+  --font-body:'Inter',sans-serif;--font-head:'Space Grotesk',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);line-height:1.7;-webkit-font-smoothing:antialiased;}
+a{color:var(--amber);text-decoration:none;}
+a:hover{color:#FFB94F;}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px;}
+
+/* ── TOPNAV ── */
+header{position:sticky;top:0;z-index:50;background:rgba(10,14,26,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);}
+nav{max-width:880px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{display:flex;align-items:center;gap:10px;}
+.nav-logo svg{width:30px;height:30px;}
+.nav-logo-text{font-family:var(--font-code);font-size:.8rem;font-weight:700;color:var(--green);}
+.nav-back{font-family:var(--font-code);font-size:.78rem;color:var(--muted);border:1px solid var(--border);padding:6px 14px;border-radius:6px;}
+.nav-back:hover{color:var(--ink);border-color:var(--green);}
+.gate-status{font-family:var(--font-code);font-size:.7rem;padding:5px 12px;border-radius:4px;letter-spacing:.06em;}
+.gate-locked{background:rgba(255,71,87,.1);border:1px solid rgba(255,71,87,.3);color:var(--red);}
+.gate-passed{background:var(--green-dim);border:1px solid rgba(0,212,106,.3);color:var(--green);display:none;}
+
+/* ── READING LAYOUT ── */
+.page{max-width:780px;margin:0 auto;padding:56px 28px 100px;}
+
+/* ── HERO ── */
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--amber-dim);border:1px solid rgba(245,166,35,.4);color:var(--amber);font-family:var(--font-code);font-size:.7rem;letter-spacing:.1em;padding:6px 14px;border-radius:4px;margin-bottom:24px;}
+.hero-badge .pulse{width:7px;height:7px;border-radius:50%;background:var(--amber);animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(245,166,35,.6);}50%{box-shadow:0 0 0 7px rgba(245,166,35,0);}}
+h1{font-family:var(--font-head);font-size:clamp(2rem,4vw,2.8rem);font-weight:700;line-height:1.06;letter-spacing:-.02em;margin-bottom:16px;}
+h1 .accent{color:var(--amber);}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px;}
+.pill{font-family:var(--font-code);font-size:.72rem;color:var(--muted);background:var(--card);border:1px solid var(--border);padding:5px 11px;border-radius:5px;}
+.hero-intro{font-size:1.05rem;color:#94A3B8;margin-bottom:40px;max-width:60ch;}
+.hero-intro strong{color:var(--ink);}
+
+/* ── SECTION HEADINGS ── */
+.sec-label{font-family:var(--font-code);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.sec-label::before{content:"";width:16px;height:1px;background:var(--amber);}
+.sec-title{font-family:var(--font-head);font-size:1.4rem;font-weight:700;margin-bottom:12px;}
+.sec-body{color:#94A3B8;font-size:.96rem;margin-bottom:20px;}
+.sec-body strong{color:var(--ink);}
+
+hr.div{border:none;border-top:1px solid var(--border);margin:48px 0;}
+
+/* ── CALLOUTS ── */
+.callout{display:flex;gap:14px;border-radius:8px;padding:16px 18px;margin:20px 0;font-size:.92rem;}
+.callout-danger{background:rgba(255,71,87,.06);border:1px solid rgba(255,71,87,.25);}
+.callout-warn{background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.3);}
+.callout-info{background:rgba(61,142,240,.06);border:1px solid rgba(61,142,240,.25);}
+.callout-success{background:rgba(0,212,106,.06);border:1px solid rgba(0,212,106,.3);}
+.callout-ico{font-size:1rem;flex-shrink:0;margin-top:2px;}
+.callout-body p{color:#94A3B8;}
+.callout-body p+p{margin-top:6px;}
+.callout-body strong{color:var(--ink);}
+
+/* ── THREE QUESTIONS ── */
+.questions{display:flex;flex-direction:column;gap:12px;margin:20px 0;}
+.q-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px 20px;display:flex;gap:14px;align-items:flex-start;}
+.q-num{font-family:var(--font-code);font-size:.72rem;font-weight:700;color:var(--amber);background:var(--amber-dim);border:1px solid rgba(245,166,35,.3);padding:3px 9px;border-radius:4px;flex-shrink:0;margin-top:2px;}
+.q-text{color:#94A3B8;font-size:.93rem;}
+.q-text strong{color:var(--ink);display:block;margin-bottom:3px;}
+
+/* ── LAW TABLE ── */
+.law-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:.88rem;}
+.law-table th{background:var(--card);border:1px solid var(--border);padding:11px 14px;font-family:var(--font-code);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);text-align:left;}
+.law-table td{border:1px solid var(--border);padding:11px 14px;color:#94A3B8;vertical-align:top;}
+.law-table td:first-child{font-family:var(--font-code);color:var(--amber);font-weight:700;white-space:nowrap;}
+.law-table tr:hover td{background:rgba(255,255,255,.02);}
+
+/* ── TERMINAL ── */
+.terminal{background:#020509;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:24px 0;font-family:var(--font-code);}
+.term-bar{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--surface);border-bottom:1px solid var(--border);}
+.td{width:11px;height:11px;border-radius:50%;}
+.term-title{font-size:.7rem;color:var(--muted);margin-left:auto;}
+.term-body{padding:18px 20px;font-size:.84rem;line-height:1.8;}
+.tp{color:var(--green);}
+.tc{color:#94A3B8;}
+.tg{color:var(--green);}
+.tb{color:var(--amber);}
+.tr{color:var(--red);}
+.tcom{color:var(--muted);font-style:italic;}
+.ic{font-family:var(--font-code);font-size:.83em;background:var(--surface);border:1px solid var(--border);padding:2px 6px;border-radius:4px;}
+
+/* ── LIST STEPS ── */
+.steps{display:flex;flex-direction:column;gap:12px;margin:20px 0;counter-reset:step;}
+.step{display:flex;gap:14px;align-items:flex-start;}
+.step-num{font-family:var(--font-code);font-size:.72rem;font-weight:700;color:var(--green);background:var(--green-dim);border:1px solid rgba(0,212,106,.3);padding:3px 9px;border-radius:4px;flex-shrink:0;margin-top:3px;}
+.step-body{color:#94A3B8;font-size:.93rem;}
+.step-body strong{color:var(--ink);}
+
+/* ── LAB BOX ── */
+.lab-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:26px;}
+.lab-box h3{font-family:var(--font-head);font-size:1.05rem;color:var(--amber);margin-bottom:10px;}
+.lab-box p{color:#94A3B8;font-size:.92rem;margin-bottom:14px;}
+.lab-task{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 18px;margin-bottom:12px;}
+.lab-task h4{font-family:var(--font-code);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:8px;}
+.lab-task ul{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.lab-task li{color:#94A3B8;font-size:.87rem;padding-left:14px;position:relative;}
+.lab-task li::before{content:"▸";position:absolute;left:0;color:var(--green);font-size:.8rem;}
+
+/* ── QUIZ ── */
+.quiz-wrap{background:var(--card);border:2px solid rgba(245,166,35,.3);border-radius:var(--radius);padding:30px;}
+.quiz-header{font-family:var(--font-code);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:8px;}
+.quiz-title{font-family:var(--font-head);font-size:1.2rem;font-weight:700;margin-bottom:6px;}
+.quiz-sub{color:#94A3B8;font-size:.88rem;margin-bottom:24px;}
+.quiz-q{font-size:.98rem;font-weight:600;margin-bottom:14px;color:var(--ink);}
+.quiz-opts{display:flex;flex-direction:column;gap:10px;}
+.quiz-opt{display:flex;align-items:center;gap:12px;padding:12px 16px;border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:.9rem;transition:border-color .15s,background .15s;}
+.quiz-opt:hover{border-color:var(--amber);background:rgba(245,166,35,.04);}
+.quiz-opt input{accent-color:var(--amber);cursor:pointer;}
+.quiz-result{margin-top:14px;font-family:var(--font-code);font-size:.88rem;display:none;}
+.quiz-result.show{display:block;}
+.quiz-nav{display:flex;align-items:center;justify-content:space-between;margin-top:18px;flex-wrap:wrap;gap:10px;}
+.quiz-progress{font-family:var(--font-code);font-size:.75rem;color:var(--muted);}
+
+/* ── GATE BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:8px;font-weight:700;font-size:.9rem;cursor:pointer;border:none;transition:transform .15s,box-shadow .15s;}
+.btn-amber{background:var(--amber);color:#000;}
+.btn-amber:hover{transform:translateY(-2px);box-shadow:0 8px 20px -6px rgba(245,166,35,.5);}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--ink);}
+.btn-outline:hover{border-color:var(--amber);color:var(--amber);}
+.btn-green{background:var(--green);color:#000;}
+.btn-green:hover{transform:translateY(-2px);box-shadow:0 8px 20px -6px rgba(0,212,106,.5);}
+.btn-disabled{background:var(--dim);color:var(--muted);cursor:not-allowed;opacity:.6;}
+
+/* ── LOCKED / UNLOCKED GATE ── */
+.gate-locked-block{background:rgba(255,71,87,.04);border:1px solid rgba(255,71,87,.2);border-radius:var(--radius);padding:28px;margin-top:32px;text-align:center;}
+.gate-locked-block .lock-ico{font-size:2.5rem;margin-bottom:12px;}
+.gate-locked-block h3{font-family:var(--font-head);font-size:1.2rem;margin-bottom:8px;color:var(--red);}
+.gate-locked-block p{color:#94A3B8;font-size:.9rem;max-width:48ch;margin:0 auto;}
+
+.gate-unlocked-block{background:rgba(0,212,106,.05);border:1px solid rgba(0,212,106,.3);border-radius:var(--radius);padding:32px;margin-top:32px;text-align:center;display:none;}
+.gate-unlocked-block .unlock-ico{font-size:2.5rem;margin-bottom:12px;}
+.gate-unlocked-block h3{font-family:var(--font-head);font-size:1.3rem;margin-bottom:8px;color:var(--green);}
+.gate-unlocked-block p{color:#94A3B8;font-size:.9rem;margin-bottom:24px;}
+.unlock-courses{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+
+/* ── PROGRESS CHECK ── */
+.prog-check{display:flex;align-items:center;gap:10px;font-size:.86rem;color:var(--muted);margin-top:20px;padding:11px 16px;border:1px solid var(--border);border-radius:8px;background:var(--surface);cursor:pointer;}
+.prog-check input{accent-color:var(--amber);cursor:pointer;}
+
+/* ── FOOTER ── */
+.course-footer{padding:36px 0;text-align:center;font-family:var(--font-code);font-size:.75rem;color:var(--muted);border-top:1px solid var(--border);margin-top:60px;}
+.course-footer a{color:var(--green);}
+.mt-4{margin-top:16px;}
+@media(max-width:600px){.law-table{font-size:.78rem;} .law-table td,.law-table th{padding:8px 10px;}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="/cybergate-academy/" class="nav-logo">
+      <svg viewBox="0 0 100 115" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50,4 L96,28 L96,62 Q96,95 50,112 Q4,95 4,62 L4,28 Z" fill="#00D46A"/>
+        <path d="M50,14 L86,34 L86,62 Q86,88 50,103 Q14,88 14,62 L14,34 Z" fill="#0A0E1A"/>
+        <rect x="46" y="38" width="8" height="50" rx="2" fill="#00D46A"/>
+        <path d="M46,40 Q20,34 12,42 L12,84 Q20,76 46,82 Z" fill="#0D4A32"/>
+        <path d="M54,40 Q80,34 88,42 L88,84 Q80,76 54,82 Z" fill="#0A3D28"/>
+        <text x="71" y="68" font-family="monospace" font-weight="700" font-size="17" fill="#00D46A" text-anchor="middle">&gt;_</text>
+        <line x1="18" y1="52" x2="42" y2="50" stroke="#00D46A" stroke-width="2.5" stroke-linecap="round" opacity="0.55"/>
+        <line x1="18" y1="62" x2="42" y2="60" stroke="#00D46A" stroke-width="2.5" stroke-linecap="round" opacity="0.38"/>
+        <line x1="18" y1="72" x2="34" y2="70" stroke="#00D46A" stroke-width="2.5" stroke-linecap="round" opacity="0.22"/>
+      </svg>
+      <span class="nav-logo-text">CyberGate Academy</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="gate-status gate-locked" id="gateStatusLocked">🔒 Gate locked</span>
+      <span class="gate-status gate-passed" id="gateStatusPassed">✓ Gate passed</span>
+      <a href="/cybergate-academy/" class="nav-back">← Home</a>
+    </div>
+  </nav>
+</header>
+
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero-badge"><span class="pulse"></span>MODULE 00 · MANDATORY GATE</div>
+  <h1>Ethics, Law &<br><span class="accent">Authorisation</span></h1>
+  <div class="hero-meta">
+    <span class="pill">⏱ 60–90 minutes</span>
+    <span class="pill">📋 Beginner · No prerequisites</span>
+    <span class="pill">🔒 Pass the quiz to unlock all courses</span>
+  </div>
+  <p class="hero-intro">This module is the gate. No tools, no scans, no labs unlock until you have completed this module and passed its checkpoint quiz. Everything you learn on this platform can help people — or land you in a courtroom. The only difference is <strong>permission</strong>. Read this one properly.</p>
+
+  <div class="terminal">
+    <div class="term-bar">
+      <div class="td" style="background:#FF5F56"></div>
+      <div class="td" style="background:#FFBD2E"></div>
+      <div class="td" style="background:#27C93F"></div>
+      <span class="term-title">student@cybergate-lab:~</span>
+    </div>
+    <div class="term-body">
+      <div><span class="tp">student@lab</span><span class="tc">:~$ cat gate_status.txt</span></div>
+      <div class="tb" style="margin-top:8px;">GATE: LOCKED</div>
+      <div class="tc">Complete this module and pass the checkpoint quiz to unlock:</div>
+      <div class="tg">  → Course 01 · Penetration Testing Foundations (22 modules)</div>
+      <div class="tg">  → Course 02 · Web Application VAPT (10 hands-on labs)</div>
+      <div style="margin-top:10px;"><span class="tp">student@lab</span><span class="tc">:~$ echo "Read carefully. This is not optional."</span></div>
+      <div class="tb">Read carefully. This is not optional.</div>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- SECTION 1: WHY FIRST -->
+  <div class="sec-label">Why this comes first</div>
+  <div class="sec-title">Same skills. Different ethics.</div>
+  <div class="sec-body">
+    <p>Most "learn hacking" resources hand you a port scanner on page one. That is how beginners end up in trouble without realising they did anything wrong. The techniques are genuinely useful and genuinely legal — <strong>when you have authorisation</strong>. Without it, the exact same command is a criminal offence.</p>
+    <p style="margin-top:12px;">By the end of this module you will be able to: explain what makes security testing legal versus illegal; describe the UK Computer Misuse Act 1990; write a scope and Rules of Engagement document; follow responsible disclosure when you find a real vulnerability; and recognise the legal outlets for your skills.</p>
+  </div>
+
+  <hr class="div">
+
+  <!-- SECTION 2: AUTHORISATION -->
+  <div class="sec-label">Section 1</div>
+  <div class="sec-title">The one idea that matters: authorisation</div>
+
+  <div class="callout callout-danger">
+    <span class="callout-ico">⚖</span>
+    <div class="callout-body"><p><strong>Permission is the line between a penetration tester and a criminal.</strong></p><p>A penetration tester runs a port scan against a client's server and gets paid. A stranger runs the identical scan against that same server and commits an offence. The packets are the same. The law cares about one thing the packets don't show: did the owner say yes, in writing, in advance?</p></div>
+  </div>
+
+  <p style="color:#94A3B8;margin-bottom:16px;font-size:.95rem;">Three questions to ask yourself before <em>any</em> action against <em>any</em> system:</p>
+  <div class="questions">
+    <div class="q-card">
+      <span class="q-num">Q1</span>
+      <div class="q-text"><strong>Do I own this system, or have explicit written permission to test it?</strong>If the answer is no — stop. There is no "I was only looking" defence.</div>
+    </div>
+    <div class="q-card">
+      <span class="q-num">Q2</span>
+      <div class="q-text"><strong>Is what I'm about to do inside the agreed scope?</strong>If it isn't written in the scope document, you are not authorised to touch it.</div>
+    </div>
+    <div class="q-card">
+      <span class="q-num">Q3</span>
+      <div class="q-text"><strong>Could this cause harm or disruption I haven't been authorised to cause?</strong>"It was right next to something in scope" is not authorisation.</div>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- SECTION 3: LAW -->
+  <div class="sec-label">Section 2</div>
+  <div class="sec-title">The law — UK Computer Misuse Act 1990</div>
+  <p class="sec-body">The CMA is the core UK law governing computer access. You are responsible for knowing it.</p>
+
+  <table class="law-table">
+    <thead><tr><th>Section</th><th>Offence</th><th>Plain English</th></tr></thead>
+    <tbody>
+      <tr><td>s.1</td><td>Unauthorised access to computer material</td><td>Getting into a system you weren't allowed into — even just looking, even if nothing is damaged.</td></tr>
+      <tr><td>s.2</td><td>Unauthorised access with intent to commit further offences</td><td>As above, but planning to do something else with that access.</td></tr>
+      <tr><td>s.3</td><td>Unauthorised acts impairing operation</td><td>Damaging, disrupting, or degrading a system — e.g. deleting data, denial of service.</td></tr>
+      <tr><td>s.3A</td><td>Making, supplying or obtaining tools for the above</td><td>Creating or distributing hacking tools intended for criminal offences.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-warn">
+    <span class="callout-ico">⚠</span>
+    <div class="callout-body">
+      <p><strong>Common mistakes beginners make:</strong></p>
+      <p>• <strong>Curiosity is not a defence.</strong> "I just wanted to see if it worked" does not make unauthorised access legal.</p>
+      <p>• <strong>Lack of damage is not a defence.</strong> Under s.1, merely accessing without permission is already an offence.</p>
+      <p>• <strong>A site being insecure is not an invitation.</strong> An unlocked door is still not yours to walk through.</p>
+      <p>• <strong>Testing a friend's site "to help" without written permission is still unauthorised.</strong></p>
+    </div>
+  </div>
+
+  <div class="callout callout-info" style="margin-top:12px;">
+    <span class="callout-ico">ℹ</span>
+    <div class="callout-body"><p>Other laws that interact with security work: the <strong>Data Protection Act 2018 / UK GDPR</strong> (if you encounter personal data), the <strong>Investigatory Powers Act</strong>, and equivalent laws in other jurisdictions. If a target system is in another country, that country's law may also apply to you.</p></div>
+  </div>
+  <label class="prog-check"><input type="checkbox" class="progress-cb"> I have read and understood the Computer Misuse Act 1990 section</label>
+
+  <hr class="div">
+
+  <!-- SECTION 4: SCOPE & ROE -->
+  <div class="sec-label">Section 3</div>
+  <div class="sec-title">Scope & Rules of Engagement</div>
+  <p class="sec-body">Professionals never test on a handshake. Every engagement requires two short documents, written and signed before any testing begins.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;">
+    <div class="lab-task">
+      <h4>Scope — WHAT and WHERE</h4>
+      <ul>
+        <li>Which systems, IP ranges, domains are in scope?</li>
+        <li>What is explicitly out of scope?</li>
+        <li>What time windows is testing permitted in?</li>
+        <li>Who is authorised to grant permission?</li>
+      </ul>
+    </div>
+    <div class="lab-task">
+      <h4>Rules of Engagement — HOW</h4>
+      <ul>
+        <li>Which techniques are permitted / forbidden?</li>
+        <li>Emergency contacts if something breaks</li>
+        <li>How sensitive data is handled and destroyed</li>
+        <li>Reporting format and deadline</li>
+      </ul>
+    </div>
+  </div>
+  <style>@media(max-width:600px){.roe-grid{grid-template-columns:1fr!important;}}</style>
+
+  <div class="terminal">
+    <div class="term-bar">
+      <div class="td" style="background:#FF5F56"></div>
+      <div class="td" style="background:#FFBD2E"></div>
+      <div class="td" style="background:#27C93F"></div>
+      <span class="term-title">scope_statement_template.txt</span>
+    </div>
+    <div class="term-body">
+      <div class="tcom"># SCOPE STATEMENT — [Client Name]</div>
+      <div><span class="tb">In scope      </span><span class="tc">: [domain/IP/application]</span></div>
+      <div><span class="tr">Out of scope  </span><span class="tc">: [email servers, staff, third-party services, all other domains]</span></div>
+      <div><span class="tc">Window        : [permitted testing times]</span></div>
+      <div><span class="tc">Authorised by : [Name, Role — Date]</span></div>
+      <div style="margin-top:10px;" class="tcom"># RULES OF ENGAGEMENT</div>
+      <div><span class="tb">Permitted     </span><span class="tc">: [web app testing, automated scanning of in-scope host]</span></div>
+      <div><span class="tr">Forbidden     </span><span class="tc">: [DoS, social engineering, access to real customer data]</span></div>
+      <div><span class="tc">Emergency     : [Name / Phone]</span></div>
+      <div><span class="tc">Data handling : findings encrypted; destroyed 30 days post-report</span></div>
+      <div><span class="tc">Deliverable   : written report within [X] working days</span></div>
+    </div>
+  </div>
+  <label class="prog-check"><input type="checkbox" class="progress-cb"> I understand what a scope document and Rules of Engagement are</label>
+
+  <hr class="div">
+
+  <!-- SECTION 5: RESPONSIBLE DISCLOSURE -->
+  <div class="sec-label">Section 4</div>
+  <div class="sec-title">Responsible Disclosure</div>
+  <p class="sec-body">If you find a genuine vulnerability — during a bug bounty or by accident — responsible disclosure is how you act ethically and stay on the right side of the law.</p>
+
+  <div class="steps">
+    <div class="step"><span class="step-num">01</span><div class="step-body"><strong>Stop.</strong> Do not explore further than needed to confirm the issue. Do not access or download other people's data.</div></div>
+    <div class="step"><span class="step-num">02</span><div class="step-body"><strong>Document</strong> what you found, minimally and factually — screenshots, request/response pairs, impact description.</div></div>
+    <div class="step"><span class="step-num">03</span><div class="step-body"><strong>Report privately</strong> to the owner via their security@ address, bug bounty platform, or published vulnerability-disclosure policy.</div></div>
+    <div class="step"><span class="step-num">04</span><div class="step-body"><strong>Give them time</strong> to fix it before telling anyone else. Industry norm is around 90 days — follow the programme's policy.</div></div>
+    <div class="step"><span class="step-num">05</span><div class="step-body"><strong>Never extort.</strong> "Pay me or I'll publish" turns responsible disclosure into a criminal offence.</div></div>
+  </div>
+  <label class="prog-check"><input type="checkbox" class="progress-cb"> I understand responsible disclosure and what NOT to do</label>
+
+  <hr class="div">
+
+  <!-- SECTION 6: LEGAL OUTLETS -->
+  <div class="sec-label">Section 5</div>
+  <div class="sec-title">Legal outlets for your skills</div>
+  <p class="sec-body">You never need to break the law to practise or prove your skills.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;">
+    <div class="lab-task"><h4>🔬 This Academy's Lab</h4><ul><li>Intentionally vulnerable local Docker targets</li><li>Fully isolated — no live systems involved</li><li>Available after passing this gate</li></ul></div>
+    <div class="lab-task"><h4>🏁 CTF Competitions</h4><ul><li>Capture The Flag — legal, scoped, community-run</li><li>picoCTF, HackTheBox CTF, TryHackMe</li></ul></div>
+    <div class="lab-task"><h4>💰 Bug Bounty Programmes</h4><ul><li>Companies pay you to find flaws — with permission</li><li>HackerOne, Bugcrowd, Intigriti</li></ul></div>
+    <div class="lab-task"><h4>💻 Your Own Systems</h4><ul><li>Spin up a VM, build a home lab — it's yours to break</li><li>No authorisation needed for what you own</li></ul></div>
+  </div>
+  <label class="prog-check"><input type="checkbox" class="progress-cb"> I know where I am and am not allowed to practise</label>
+
+  <hr class="div">
+
+  <!-- SECTION 7: LAB -->
+  <div class="sec-label">Hands-On Lab</div>
+  <div class="sec-title">Write Your First Scope & RoE</div>
+
+  <div class="lab-box">
+    <h3>Lab Scenario</h3>
+    <p>A fictional client, <strong style="color:var(--ink);">Acme Bakery Ltd</strong>, asks you to test their website <span class="ic">shop.acme-bakery.test</span> — a domain they own. They do not want their email server, staff, or any other system touched.</p>
+    <div class="lab-task">
+      <h4>Your deliverable — Scope Statement</h4>
+      <ul>
+        <li>In scope: <span class="ic">shop.acme-bakery.test</span> web application only</li>
+        <li>Out of scope: mail servers, staff, physical premises, all other domains</li>
+        <li>Testing window: weekdays 18:00–22:00 (client local time)</li>
+        <li>Authorised by: [name / role / date]</li>
+      </ul>
+    </div>
+    <div class="lab-task">
+      <h4>Your deliverable — Rules of Engagement</h4>
+      <ul>
+        <li>Permitted: web application testing, automated scanning of in-scope host only</li>
+        <li>Forbidden: denial of service, social engineering, accessing real customer data</li>
+        <li>Emergency contact: [name / phone]</li>
+        <li>Data handling: findings stored encrypted, destroyed 30 days after report</li>
+        <li>Deliverable: written report within 7 working days</li>
+      </ul>
+    </div>
+  </div>
+  <label class="prog-check"><input type="checkbox" class="progress-cb"> I have written my first Scope & RoE document for this scenario</label>
+
+  <hr class="div">
+
+  <!-- QUIZ -->
+  <div class="quiz-wrap" id="quizSection">
+    <div class="quiz-header">Checkpoint Quiz · Must Pass to Unlock</div>
+    <div class="quiz-title">Ethics Gate — 5 Questions</div>
+    <p class="quiz-sub">You must answer all 5 questions correctly to unlock Course 01 and Course 02. You can retake as many times as needed.</p>
+
+    <div class="quiz-q" id="qText">Loading…</div>
+    <div class="quiz-opts" id="qOpts"></div>
+    <div class="quiz-result" id="qResult"></div>
+    <div class="quiz-nav">
+      <span class="quiz-progress">Question <span id="qNum">1</span> of <span id="qTotal">5</span></span>
+      <button class="btn btn-amber" onclick="nextQ()" id="qBtn" style="display:none;">Next →</button>
+    </div>
+  </div>
+
+  <!-- LOCKED state -->
+  <div class="gate-locked-block" id="gateLocked">
+    <div class="lock-ico">🔒</div>
+    <h3>Courses locked</h3>
+    <p>Pass the checkpoint quiz above to unlock Course 01 · Penetration Testing Foundations and Course 02 · Web Application VAPT.</p>
+  </div>
+
+  <!-- UNLOCKED state -->
+  <div class="gate-unlocked-block" id="gateUnlocked">
+    <div class="unlock-ico">🏅</div>
+    <h3>Ethics Gate passed — courses unlocked</h3>
+    <p>You have earned the Licence to Learn badge. The courses below are now accessible. Return here any time to review the ethics content.</p>
+    <div class="unlock-courses">
+      <a class="btn btn-green" href="/cybergate-academy/01-foundations/">▶ Course 01 · Penetration Testing Foundations</a>
+      <a class="btn btn-outline" href="/cybergate-academy/02-web-vapt/">Course 02 · Web App VAPT</a>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+<div style="max-width:780px;margin:0 auto;padding:0 28px;">
+  <div class="course-footer">
+    <svg viewBox="0 0 100 115" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:32px;height:32px;margin:0 auto 12px;" aria-hidden="true">
+      <path d="M50,4 L96,28 L96,62 Q96,95 50,112 Q4,95 4,62 L4,28 Z" fill="#00D46A"/>
+      <path d="M50,14 L86,34 L86,62 Q86,88 50,103 Q14,88 14,62 L14,34 Z" fill="#0A0E1A"/>
+      <rect x="46" y="38" width="8" height="50" rx="2" fill="#00D46A"/>
+      <path d="M46,40 Q20,34 12,42 L12,84 Q20,76 46,82 Z" fill="#0D4A32"/>
+      <path d="M54,40 Q80,34 88,42 L88,84 Q80,76 54,82 Z" fill="#0A3D28"/>
+      <text x="71" y="68" font-family="monospace" font-weight="700" font-size="17" fill="#00D46A" text-anchor="middle">&gt;_</text>
+    </svg>
+    <p>CyberGate Academy — Module 00 · Ethics, Law & Authorisation</p>
+    <p class="mt-4">© 2026 <a href="https://stephenodunze.online" target="_blank">GeeksDane Consultancy Ltd</a> · <a href="/cybergate-academy/">← Back to Home</a></p>
+  </div>
+</div>
+
+<script>
+const GATE_KEY = 'cybergate_ethics_passed';
+
+// Quiz data
+const questions = [
+  {
+    q: "A website has an obvious security flaw and no login. Are you allowed to test it without written permission?",
+    opts: ["Yes — if it's public it's fair game","Yes — if you don't cause damage","No — insecurity is not authorisation","Only if it's a well-known site"],
+    ans: 2
+  },
+  {
+    q: "Under the Computer Misuse Act 1990, is merely accessing a system without permission a criminal offence even if you cause no damage?",
+    opts: ["No — only if data is stolen","No — only if the system is disrupted","Yes — unauthorised access alone is an offence under s.1","Only if you access it more than once"],
+    ans: 2
+  },
+  {
+    q: "You accidentally discover a serious vulnerability on a live website while browsing. What should you do first?",
+    opts: ["Exploit it fully to document the impact, then report","Stop exploring further and report privately to the owner","Post it publicly to warn other users","Ignore it — it's not your responsibility"],
+    ans: 1
+  },
+  {
+    q: "Which of these is a legal place to practise offensive security techniques?",
+    opts: ["A friend's server without telling them","A public website with no login page","Your own local Docker lab","Any server that responds to ping"],
+    ans: 2
+  },
+  {
+    q: "Something is directly adjacent to an in-scope host but isn't listed in the scope document. May you test it?",
+    opts: ["Yes — if it's on the same IP range","Yes — if the client likely owns it","No — if it isn't in the scope document you are not authorised","Only if it responds to ping"],
+    ans: 2
+  },
+];
+
+let cur = 0, score = 0, answered = false;
+
+function renderQ() {
+  const q = questions[cur];
+  document.getElementById('qText').textContent = q.q;
+  document.getElementById('qNum').textContent = cur + 1;
+  document.getElementById('qTotal').textContent = questions.length;
+  const opts = document.getElementById('qOpts');
+  opts.innerHTML = '';
+  q.opts.forEach((o, i) => {
+    const d = document.createElement('div');
+    d.className = 'quiz-opt';
+    d.innerHTML = `<input type="radio" name="q" value="${i}" id="o${i}"><label for="o${i}" style="cursor:pointer;flex:1;">${o}</label>`;
+    d.addEventListener('click', () => { if (!answered) selectAnswer(i); });
+    opts.appendChild(d);
+  });
+  document.getElementById('qResult').className = 'quiz-result';
+  document.getElementById('qResult').textContent = '';
+  document.getElementById('qBtn').style.display = 'none';
+  answered = false;
+}
+
+function selectAnswer(i) {
+  answered = true;
+  const q = questions[cur];
+  document.querySelectorAll('#qOpts .quiz-opt').forEach((o, idx) => {
+    o.style.borderColor = idx === q.ans ? 'var(--green)' : idx === i && i !== q.ans ? 'var(--red)' : '';
+    o.style.background = idx === q.ans ? 'rgba(0,212,106,.06)' : idx === i && i !== q.ans ? 'rgba(255,71,87,.06)' : '';
+    o.style.pointerEvents = 'none';
+  });
+  const r = document.getElementById('qResult');
+  if (i === q.ans) {
+    score++;
+    r.textContent = '✓ Correct!';
+    r.style.color = 'var(--green)';
+  } else {
+    r.textContent = `✗ Not quite — the answer is: "${q.opts[q.ans]}"`;
+    r.style.color = 'var(--red)';
+  }
+  r.classList.add('show');
+  const btn = document.getElementById('qBtn');
+  btn.style.display = 'inline-flex';
+  btn.textContent = cur < questions.length - 1 ? 'Next question →' : 'See results';
+}
+
+function nextQ() {
+  cur++;
+  if (cur >= questions.length) {
+    showResult();
+  } else {
+    renderQ();
+  }
+}
+
+function showResult() {
+  const passed = score === questions.length;
+  document.getElementById('qText').textContent = `Quiz complete — you scored ${score}/${questions.length}.`;
+  document.getElementById('qOpts').innerHTML = '';
+  const r = document.getElementById('qResult');
+  r.classList.add('show');
+
+  if (passed) {
+    r.style.color = 'var(--green)';
+    r.textContent = '🏅 All correct — Ethics Gate passed!';
+    unlockGate();
+  } else {
+    r.style.color = 'var(--amber)';
+    r.textContent = `Review the sections where you were unsure, then retry below.`;
+    document.getElementById('qBtn').style.display = 'inline-flex';
+    document.getElementById('qBtn').textContent = '↺ Retry quiz';
+    document.getElementById('qBtn').onclick = retryQuiz;
+  }
+}
+
+function retryQuiz() {
+  cur = 0; score = 0; answered = false;
+  document.getElementById('qBtn').onclick = nextQ;
+  renderQ();
+}
+
+function unlockGate() {
+  try { localStorage.setItem(GATE_KEY, 'true'); } catch(e) {}
+  document.getElementById('qBtn').style.display = 'none';
+  document.getElementById('gateLocked').style.display = 'none';
+  document.getElementById('gateUnlocked').style.display = 'block';
+  document.getElementById('gateStatusLocked').style.display = 'none';
+  document.getElementById('gateStatusPassed').style.display = 'inline-flex';
+}
+
+function checkGateStatus() {
+  try {
+    if (localStorage.getItem(GATE_KEY) === 'true') {
+      document.getElementById('gateLocked').style.display = 'none';
+      document.getElementById('gateUnlocked').style.display = 'block';
+      document.getElementById('gateStatusLocked').style.display = 'none';
+      document.getElementById('gateStatusPassed').style.display = 'inline-flex';
+      // Update quiz section to show already passed
+      document.getElementById('qText').textContent = 'You have already passed this quiz. ✓';
+      document.getElementById('qOpts').innerHTML = '';
+      document.getElementById('qNum').textContent = '5';
+      const r = document.getElementById('qResult');
+      r.textContent = '🏅 Ethics Gate already passed — courses are unlocked.';
+      r.style.color = 'var(--green)';
+      r.classList.add('show');
+    }
+  } catch(e) {}
+}
+
+// Init
+renderQ();
+checkGateStatus();
+</script>
+</body>
+</html>
