@@ -1,4 +1,4 @@
-# CyberQuest Academy
+# CyberGate Academy
 
 > Free, beginner-to-advanced, **ethics-first** training in cybersecurity and ethical-hacking automation.
 
