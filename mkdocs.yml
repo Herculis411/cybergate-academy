@@ -3,8 +3,8 @@
 #  Cybersecurity & Ethical Hacking Programming Automation
 # =============================================================================
 
-site_name: CyberQuest Academy
-site_description: Free, beginner-to-advanced, ethics-first cybersecurity & ethical-hacking automation training.
+site_name: CyberGate Academy
+site_description: Free, ethics-first cybersecurity training. Pass the gate. Earn your access.
 site_author: GeeksDane Consultancy
 extra_css:
   - stylesheets/extra.css
